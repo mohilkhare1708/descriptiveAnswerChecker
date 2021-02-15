@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # our apps
+    'users.apps.UsersConfig',
     'layouts.apps.LayoutsConfig',
     # django apps
     'django.contrib.admin',

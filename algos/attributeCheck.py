@@ -1,6 +1,16 @@
 import nltk
+import tensorflow as tf
+import tensorflow_hub as hub
+
+
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
+
+
+def tfLCSChecker(modelans, kidans):
+    embed = hub.load("https://tfhub.dev/google/tf2-preview/nnlm-en-dim128/1")
+    embeddings = embed([modelans, kidans])
+    return tf.keras.losses.cosine_similarity(embeddings[0], embeddings[1], axis=-1)
 
 
 def cleanSentence(sentence):
@@ -46,5 +56,6 @@ def lengthChecker(modelans, kidans):
 print(lcsChecker("my name is groot", "groot is my name"))
 print(keywordsChecker("my name is groot", "groot is my name"))
 print(lengthChecker("my name is groot", "groot is my name"))
+print(tfLCSChecker("continuing forever", "continuing forever in the same way"))
 
 

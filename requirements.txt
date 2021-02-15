@@ -5,6 +5,7 @@ Automat==20.2.0
 backcall==0.2.0
 bleach==3.2.2
 cffi==1.14.4
+click==7.1.2
 colorama==0.4.4
 constantly==15.1.0
 cryptography==3.3.1
@@ -20,6 +21,7 @@ ipython==7.16.1
 ipython-genutils==0.2.0
 jedi==0.18.0
 Jinja2==2.11.2
+joblib==1.0.1
 jsonschema==3.2.0
 jupyter-client==6.1.11
 jupyter-core==4.7.0
@@ -29,6 +31,7 @@ mistune==0.8.4
 nbclient==0.5.1
 nbformat==5.1.2
 nest-asyncio==1.4.3
+nltk==3.5
 numpy==1.20.0
 packaging==20.8
 pandocfilters==1.4.3
@@ -48,11 +51,13 @@ pytz==2021.1
 pywin32==300
 pywinpty @ file:///C:/Users/mohil/Downloads/pywinpty-0.5.7-cp39-cp39-win_amd64.whl
 pyzmq==21.0.1
+regex==2020.11.13
 six==1.15.0
 sniffio==1.2.0
 sqlparse==0.4.1
 testpath==0.4.4
 tornado==6.1
+tqdm==4.56.2
 traitlets==4.3.3
 txaio==20.12.1
 urllib3==1.26.2

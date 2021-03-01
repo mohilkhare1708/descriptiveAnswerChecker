@@ -43,6 +43,13 @@
 
 		</div>
 	</header>
+	{% if messages %}
+		{% for message in messages %}
+			<div class="alert alert-{{ message.tags }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endif %}
 	{% block content %}{%endblock %}
 	<footer id="footer" class="footer">
 		<div class="footer-top">

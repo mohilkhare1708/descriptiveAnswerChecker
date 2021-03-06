@@ -1,11 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<style>
-  .invalid-feedback {
-    display: initial;
-  }
-</style>
 <section id="hero" class="hero d-flex align-items-center">
   <div class="register-box pt-5" style="margin: auto !important; width: 500px !important;">
     <div class="card" >
@@ -13,18 +8,20 @@
         <form method="POST">
           {% csrf_token %}
           <fieldset class="form-group">
-            <h2><p class="login-box-msg">Register</p></h2>
+            <h2><p class="login-box-msg">Log in</p></h2>
             {{ form|crispy }}
           </fieldset>
           <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            <button class="btn btn-outline-info" type="submit">Log in</button>
           </div>
         </form>
-        <div class="border-top pt-2">
-          <small class="text-muted">
-            Already have an account? <a class="ml-2" href="{% url 'login' %}">Log in!</a>
-          </small>
-        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>

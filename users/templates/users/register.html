@@ -1,22 +1,22 @@
 {% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 <section id="hero" class="hero d-flex align-items-center">
-    <div class = "container">
+  <div class="register-box pt-5" style="margin: auto !important; width: 500px !important;">
+    <div class="card" >
+      <div class="card-body register-card-body">
         <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4"> Join Today</legend>
-                {{ form.as_p }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
-            </div>
+          {% csrf_token %}
+          <fieldset class="form-group">
+            <p class="login-box-msg">Register a new membership</p>
+            {{ form|crispy }}
+          </fieldset>
+          <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+          </div>
         </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="#">Sign in</a>
-            </small>
-        </div>
+      </div>
     </div>
+  </div>
 </section>
 {% endblock content %}

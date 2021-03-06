@@ -17,7 +17,6 @@ def cleanSentence(sentence):
     okPOS = ['NN', 'DT', 'JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'RB', 'RBR', 'RBS', 'SYM', 'TO', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', 'WRB']
     sentenceTk = nltk.word_tokenize(sentence)
     sentencePOS = nltk.pos_tag(sentenceTk)
-    print(sentencePOS)
     # keeping nouns, adjectives, verbs and cleaning the rest
     cleaned = []
     for i in range(len(sentenceTk)):

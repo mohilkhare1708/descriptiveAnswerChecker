@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section id="hero" class="hero d-flex align-items-center">
+  <div class="register-box pt-5" style="margin: auto !important; width: 500px !important;">
+    <div class="card" >
+        <h2 class="m-5">You've logged out successfully, this session has now expired.</h2>
+        <div class="ml-5 mb-5 form-group">
+            <a href="{% url 'home-page' %}"><button class="btn btn-outline-info" type="submit">Home</button>
+            <a href="{% url 'login' %}"><button class="btn btn-outline-info" type="submit">Log in</button>
+          </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

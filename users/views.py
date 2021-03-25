@@ -14,4 +14,10 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+def dashboard(request):
+    context = {
+
+    }
+    return render(request, 'users/dashboard.html', context)
     

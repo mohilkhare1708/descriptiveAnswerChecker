@@ -1,10 +1,10 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
 <div class="content" style="margin-top:100px;">
-<h1>Dashboard</h1>
-<h4>Greetings, {{ request.User.get_profile.full_name }}</h4>
+<h2 class="ml-5 mt-5">Dashboard</h2>
+<h5 class="ml-5">Greetings, {{ name }}</h5>
       <div class="container-fluid">
-        <div class="row">
+        <div class="row ml-4 mr-4">
           <div class="col-lg-6">
             <div class="card">
               <div class="card-header border-0">

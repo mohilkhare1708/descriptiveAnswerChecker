@@ -203,6 +203,7 @@ section {
 */
 .navbar {
   padding: 0;
+  right: -30%;
 }
 
 .navbar ul {

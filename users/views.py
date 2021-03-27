@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegisterForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from . import models
 
 
 def register(request):
@@ -25,8 +26,9 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 def dashboard(request):
+    name = request.user
     context = {
-
+        'name' : name.profile.full_name
     }
     return render(request, 'users/dashboard.html', context)
     

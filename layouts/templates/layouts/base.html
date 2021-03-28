@@ -39,7 +39,7 @@
 					<li><a class="nav-link scrollto active" href="#hero">Home</a></li>
 					<li><a class="nav-link scrollto" href="#about">Docs</a></li>
 					{% if user.is_authenticated %}
-						<li><a href="#about"><button class="btn btn-outline-info">Dashboard</button></a></li>
+						<li><a href="{% url 'dashboard' %}"><button class="btn btn-outline-info">Dashboard</button></a></li>
 						<li><a class="getstarted scrollto" href="{% url 'logout' %}">Logout</a></li>
 					{% else %}
 						<li><a class="getstarted scrollto" href="{% url 'register' %}">Get Started</a></li>

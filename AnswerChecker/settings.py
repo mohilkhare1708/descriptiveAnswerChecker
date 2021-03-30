@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'layouts.apps.LayoutsConfig',
     'crispy_forms',
     'jazzmin',
+    'evaluate.apps.EvaluateConfig',
     # django apps
     'django.contrib.admin',
     'django.contrib.auth',

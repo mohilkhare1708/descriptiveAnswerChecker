@@ -10,7 +10,9 @@ def createTest(request):
     if request.method == 'POST':
         form = TestCreateForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            doc = form.save(commit=False)
+            doc.user = request.user
+            doc.save()
             return redirect('home-page')
     else:
         form = TestCreateForm()

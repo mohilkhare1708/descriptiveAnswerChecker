@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Tests(models.Model):
+class Test(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     test_name = models.CharField(max_length=100)
     model_answer_key = models.FileField(upload_to='modelAns/')

@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from evaluate.forms import TestCreateForm
-from evaluate.models import Result
+#from evaluate.models import Result
 
 # Create your views here.
 @login_required

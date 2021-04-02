@@ -9,4 +9,11 @@ class TestsAdmin(admin.ModelAdmin):
     search_fields = ('id', 'test_name')
     list_per_page = 20
 
+class ResultsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'test')
+    list_display_links = ('id', 'test')
+    search_fields = ('id', 'test')
+    list_per_page = 20
+
 admin.site.register(models.Test, TestsAdmin)
+admin.site.register(models.Result, ResultsAdmin)

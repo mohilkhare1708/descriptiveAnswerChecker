@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 from django.db.models.deletion import CASCADE
 
 class Test(models.Model):
@@ -12,8 +13,9 @@ class Test(models.Model):
     passing_marks = models.IntegerField()
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
-# class Result(models.Model):
-#     test = models.OneToOneField(Test, on_delete=models.CASCADE)
-#     token = models.CharField(default='')
-#     result = models.FileField( upload_to=None, max_length=100)
+class Result(models.Model):
+    test = models.OneToOneField(Test, on_delete=models.CASCADE)
+    names = ArrayField(models.CharField(max_length=100))
+    emails = ArrayField(models.CharField(max_length=100))
+    scores = ArrayField(models.IntegerField())
     

@@ -28,15 +28,11 @@ def createTest(request):
                 print(makEXT, rsEXT, "hihi")
                 return render(request, 'evaluate/createTest.html', {'form' : TestCreateForm()})
             doc.save()
-            res = Result(test = doc, names = ['Mohil Khare', 'Prasuk Jain', 'Harsh Katkade'], emails = ['mohil.khare@somaiya.edu', 'prasuk.jain@somaiya.edu', 'harsh.katkade@somaiya.edu'], scores = [20, 19, 18])
-            res.save()
+            res = Result.objects.get(test = doc)
             data = []
             for i in range(3):
                 data.append([res.names[i], res.scores[i], res.emails[i]])
-            # return redirect('home-page')
-            # return redirect()
-            # testSummary(request, {'result': data})
-            return render(request, 'evaluate/testSummary.html', {'result' : data, 'len' : 3, 'name' : doc.test_name})
+            return render(request, 'evaluate/testSummary.html', {'result' : data, 'name' : doc.test_name})
 
     else:
         form = TestCreateForm()

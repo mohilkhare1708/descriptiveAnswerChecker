@@ -26,7 +26,7 @@ def createTest(request):
             rsEXT = findEXT(doc.response_sheet.name)
             if makEXT not in ['xls', 'xlsx', 'csv'] or rsEXT not in ['xls', 'xlsx', 'csv']:
                 print(makEXT, rsEXT, "hihi")
-                return render(request, 'evaluate/createTest.html', {'form' : form})
+                return render(request, 'evaluate/createTest.html', {'form' : form, 'title' : 'Evaluate'})
             doc.save()
             res = Result.objects.get(test = doc)
             return redirect('testSummary', res.pk)
@@ -35,7 +35,8 @@ def createTest(request):
     else:
         form = TestCreateForm()
     context = {
-        'form' : form
+        'form' : form,
+        'title' : 'Evaluate'
     }
     return render(request, 'evaluate/createTest.html', context)
 
@@ -46,4 +47,4 @@ def testSummary(request, pk):
     data = []
     for i in range(3):
         data.append([res.names[i], res.scores[i], res.emails[i]])
-    return render(request, 'evaluate/testSummary.html', {'result' : data})
+    return render(request, 'evaluate/testSummary.html', {'result' : data, 'title' : 'Test Summary'})

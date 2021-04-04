@@ -1,0 +1,88 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content" style="margin-top:100px;">
+	<div class="container-fluid">
+		<div class="row ml-4 mr-4 mt-5">
+			<div class="col-lg-4">
+				<div class="small-box bg-success">
+					<div class="inner">
+						<h3>90<sup style="font-size: 20px">%</sup></h3>
+						<p>Maximum Score</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-stats-bars"></i>
+					</div>
+					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="small-box bg-warning">
+					<div class="inner">
+						<h3>44</h3>
+						<p>Number of Students</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="small-box bg-danger">
+					<div class="inner">
+						<h3>72<sup style="font-size: 20px">%</sup></h3>
+						<p>Class Average</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-pie-graph"></i>
+					</div>
+					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+    <div class="row ml-4 mr-4 mt-5">
+			<div class="col-lg-7">
+				<div class="card mt-3" >
+					<div class="card-header border-0">
+							<h3 class="card-title">Test Result - {{ name }}</h3>
+					</div>
+					<div class="card-body table-responsive p-0">
+						<table class="table table-striped table-valign-middle">
+							<thead>
+								<tr>
+										<th>Student</th>
+										<th>Score</th>
+										<th>Email</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for i in result %}
+									<tr>
+										<td>{{ i.0 }}</td>
+										<td>{{ i.1 }}</td>
+										<td>{{ i.2 }}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div>
+					<button type="button" class="btn btn-success btn-lg">Send Result to Students</button>
+				</div>
+			</div>
+      <div class="col-lg-5 text-center">
+				{% comment %} <div class="col-lg-6">
+					
+				</div> {% endcomment %}
+				<img src="{% static 'img/topper.png' %}" class="img-fluid" alt="" height="40%" width="40%">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

@@ -5,4 +5,5 @@ from evaluate import views as evaluate_views
 
 urlpatterns = [
     path('', evaluate_views.createTest, name='createTest'),
+    path('testSummary/<int:pk>', evaluate_views.testSummary, name='testSummary'),
 ]

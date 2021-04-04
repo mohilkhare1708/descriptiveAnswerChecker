@@ -24,13 +24,14 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form, 'title' : 'Register'})
 
 @login_required
 def dashboard(request):
     name = request.user
     context = {
-        'name' : name.profile.full_name
+        'name' : name.profile.full_name,
+        'title' : 'Dashboard'
     }
     return render(request, 'users/dashboard.html', context)
     

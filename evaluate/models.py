@@ -18,6 +18,9 @@ class Test(models.Model):
     passing_marks = models.IntegerField()
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.test_name
+
 class Result(models.Model):
     test = models.OneToOneField(Test, on_delete=models.CASCADE)
     names = ArrayField(models.CharField(max_length=100))

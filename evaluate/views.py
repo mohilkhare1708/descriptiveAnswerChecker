@@ -3,11 +3,7 @@ from evaluate.models import Result
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from evaluate.forms import TestCreateForm
-import pandas as pd
-import os
-#from evaluate.models import Result
 
-# Create your views here.
 def findEXT(a):
     if a[-4] == '.':
         return a[-3:]
@@ -30,8 +26,6 @@ def createTest(request):
             doc.save()
             res = Result.objects.get(test = doc)
             return redirect('testSummary', res.pk)
-            #return render(request, 'evaluate/testSummary.html', {'result' : data, 'name' : doc.test_name})
-
     else:
         form = TestCreateForm()
     context = {
@@ -47,4 +41,9 @@ def testSummary(request, pk):
     data = []
     for i in range(3):
         data.append([res.names[i], res.scores[i], res.emails[i]])
-    return render(request, 'evaluate/testSummary.html', {'result' : data, 'title' : 'Test Summary', 'name' : res.test.test_name})
+    context = {
+        'result' : data,
+        'title' : 'Test Summary',
+        'name' : res.test.test_name
+    }
+    return render(request, 'evaluate/testSummary.html', context)

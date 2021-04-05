@@ -26,6 +26,14 @@ class Result(models.Model):
     names = ArrayField(models.CharField(max_length=100))
     emails = ArrayField(models.CharField(max_length=100))
     scores = ArrayField(models.IntegerField())
+    total_students = models.IntegerField(default=75)
+    mean_percentage = models.IntegerField(default=70)
+    success_rate = models.IntegerField(default=90)
+    high_score = models.IntegerField(default=20)
+
+    def __str__(self):
+        return self.test.test_name + "'s Result"
+
     
 @receiver(post_save, sender=Test)
 def update_result_signal(sender, instance, created, **kwargs):
@@ -42,5 +50,8 @@ def update_result_signal(sender, instance, created, **kwargs):
         # score generation logic here
         for i in range(len(names)):
             scores.append(20)
-        Result.objects.create(test=instance,names=names,emails=emails, scores=scores)
+        successRate, totalStudents = 0, len(names)
+        meanPercentage = (sum(scores)/(instance.total_marks*totalStudents))*100
+        highScore = max(scores)
+        Result.objects.create(test=instance,names=names,emails=emails,scores=scores,total_students=totalStudents,mean_percentage=meanPercentage,success_rate=successRate,high_score=highScore)
     instance.result.save()

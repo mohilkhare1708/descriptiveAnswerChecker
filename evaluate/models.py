@@ -9,7 +9,7 @@ import os
 import string
 import random
 from django.conf import settings
-from attributecheck import tfLCSChecker, cleanSentence, keywordsChecker, lengthChecker
+from algos.attributeCheck import tfLCSChecker, cleanSentence, keywordsChecker, lengthChecker
 
 a=0.2
 b = 0.5
@@ -50,24 +50,27 @@ def update_result_signal(sender, instance, created, **kwargs):
         mans= pd.DataFrame(data=mans)
         rsheet = pd.read_csv(os.path.join(settings.BASE_DIR, str(instance.response_sheet)))
         rsheet= pd.DataFrame(data=rsheet)
-        names, emails, scores, rollno, answer = [], [], [], [], []
+        names, emails, scores, rollno, answer, passing = [], [], [], [], [], 0
+        modelAns = mans['Q1'][0]
         for i in range(len(rsheet)):
-            names.append(rsheet[i]['Name'])
-            emails.append(rsheet[i]['Email'])
-            rollno.append(rsheet[i]['Roll Number'])
-            answers.append(rsheet[i]['Answer'])
+            names.append(rsheet['Name'][i])
+            emails.append(rsheet['Email'][i])
+            rollno.append(rsheet['Roll Number'][i])
+            answer.append(rsheet['Answer'][i])
         # score generation logic here
         for i in range(len(answer)):
             cleaned = cleanSentence(answer[i])
-            lCS_score = tfLCSChecker(cleaned)
-            len_score = lengthChecker(cleaned)
-            keyword_score = keywordsChecker(cleaned)
+            lCS_score = tfLCSChecker(modelAns, cleaned)
+            len_score = lengthChecker(modelAns, cleaned)
+            keyword_score = keywordsChecker(modelAns, cleaned)
             marks = a * lCS_score + b * len_score + c * keyword_score
             scores.append(marks)
-            df = pd.DataFrame(list(zip(rollno, names, score, emails)), columns=['Roll Number', 'Name', 'Marks', 'Email'])
-            token = ''.join(random.choices(string.ascii_uppercase + string.digits, k = N))
-            df.to_csv(f'{token}.csv')
-        successRate, totalStudents = 0, len(names)
+            if marks >= instance.passing_marks:
+                passing += 1
+            # df = pd.DataFrame(list(zip(rollno, names, scores, emails)), columns=['Roll Number', 'Name', 'Marks', 'Email'])
+            # token = ''.join(random.choices(string.ascii_uppercase + string.digits, k = N))
+            # df.to_csv(f'{token}.csv')
+        successRate, totalStudents = ((passing / len(scores)) * 100), len(names)
         meanPercentage = (sum(scores)/(instance.total_marks*totalStudents))*100
         highScore = max(scores)
         Result.objects.create(test=instance,names=names,emails=emails,scores=scores,total_students=totalStudents,mean_percentage=meanPercentage,success_rate=successRate,high_score=highScore)

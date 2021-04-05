@@ -51,14 +51,11 @@ def update_result_signal(sender, instance, created, **kwargs):
         rsheet = pd.read_csv(os.path.join(settings.BASE_DIR, str(instance.response_sheet)))
         rsheet= pd.DataFrame(data=rsheet)
         names, emails, scores, rollno, answer = [], [], [], [], []
-        for name in rsheet['Name']:
-            names.append(name)
-        for email in rsheet['Email']:
-            emails.append(email)
-        for roll in rsheet['Roll Number']:
-            rollno.append(roll)
-        for ans in rsheet['Answers']:
-            answer.append(ans)
+        for i in range(len(rsheet)):
+            names.append(rsheet[i]['Name'])
+            emails.append(rsheet[i]['Email'])
+            rollno.append(rsheet[i]['Roll Number'])
+            answers.append(rsheet[i]['Answer'])
         # score generation logic here
         for i in range(len(answer)):
             cleaned = cleanSentence(answer[i])

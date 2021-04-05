@@ -39,11 +39,14 @@ def createTest(request):
 def testSummary(request, pk):
     res = Result.objects.get(pk = pk)
     data = []
-    for i in range(3):
+    for i in range(len(res.names)):
         data.append([res.names[i], res.scores[i], res.emails[i]])
     context = {
         'result' : data,
         'title' : 'Test Summary',
-        'name' : res.test.test_name
+        'name' : res.test.test_name,
+        'maxScore' : res.high_score,
+        'noStudents' : res.total_students,
+        'classAvg' : res.mean_percentage
     }
     return render(request, 'evaluate/testSummary.html', context)

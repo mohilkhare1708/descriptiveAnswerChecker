@@ -9,11 +9,11 @@ import os
 import string
 import random
 from django.conf import settings
-from algos.attributeCheck import tfLCSChecker, cleanSentence, keywordsChecker, lengthChecker
+from algos.attributeCheck import cleanSentence, keywordsChecker, lengthChecker, lcsChecker
 
-a=0.2
+a=0.45
 b = 0.5
-c = 0.3
+c = 0.05
 N = 5
 
 class Test(models.Model):
@@ -52,6 +52,7 @@ def update_result_signal(sender, instance, created, **kwargs):
         rsheet= pd.DataFrame(data=rsheet)
         names, emails, scores, rollno, answer, passing = [], [], [], [], [], 0
         modelAns = mans['Q1'][0]
+        modelAns = cleanSentence([modelAns])
         for i in range(len(rsheet)):
             names.append(rsheet['Name'][i])
             emails.append(rsheet['Email'][i])
@@ -59,12 +60,14 @@ def update_result_signal(sender, instance, created, **kwargs):
             answer.append(rsheet['Answer'][i])
         # score generation logic here
         for i in range(len(answer)):
-            cleaned = cleanSentence(answer[i])
-            lCS_score = tfLCSChecker(modelAns, cleaned)
+            cleaned = cleanSentence([answer[i]])
+            print(cleaned)
+            lCS_score = lcsChecker(modelAns, cleaned)
             len_score = lengthChecker(modelAns, cleaned)
             keyword_score = keywordsChecker(modelAns, cleaned)
-            marks = a * lCS_score + b * len_score + c * keyword_score
-            scores.append(marks)
+            print(lCS_score, len_score, keyword_score)
+            marks = a * lCS_score + c * len_score + b * keyword_score
+            scores.append(marks*100)
             if marks >= instance.passing_marks:
                 passing += 1
             # df = pd.DataFrame(list(zip(rollno, names, scores, emails)), columns=['Roll Number', 'Name', 'Marks', 'Email'])

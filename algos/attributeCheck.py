@@ -1,28 +1,31 @@
-import nltk
-import tensorflow as tf
-import tensorflow_hub as hub
+# import nltk
+# import tensorflow as tf
+# import tensorflow_hub as hub
 
 
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
+# nltk.download('punkt')
+# nltk.download('averaged_perceptron_tagger')
 
 
-def tfLCSChecker(modelans, kidans):
-    embed = hub.load("https://tfhub.dev/google/tf2-preview/nnlm-en-dim128/1")
-    embeddings = embed([modelans, kidans])
-    return tf.keras.losses.cosine_similarity(embeddings[0], embeddings[1], axis=-1)
+# def tfLCSChecker(modelans, kidans):
+#     embed = hub.load("https://tfhub.dev/google/tf2-preview/nnlm-en-dim128/1")
+#     embeddings = embed([modelans, kidans])
+#     return tf.keras.losses.cosine_similarity(embeddings[0], embeddings[1], axis=-1)
+
+def cleanSentence(lst):
+    return (lst[0].split())
 
 
-def cleanSentence(sentence):
-    okPOS = ['NN', 'DT', 'JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'RB', 'RBR', 'RBS', 'SYM', 'TO', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', 'WRB']
-    sentenceTk = nltk.word_tokenize(sentence)
-    sentencePOS = nltk.pos_tag(sentenceTk)
-    # keeping nouns, adjectives, verbs and cleaning the rest
-    cleaned = []
-    for i in range(len(sentenceTk)):
-        if sentencePOS[i][1] in okPOS:
-            cleaned.append(sentencePOS[i][0])
-    return cleaned
+# def cleanSentence(sentence):
+#     okPOS = ['NN', 'DT', 'JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'RB', 'RBR', 'RBS', 'SYM', 'TO', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', 'WRB']
+#     sentenceTk = nltk.word_tokenize(sentence)
+#     sentencePOS = nltk.pos_tag(sentenceTk)
+#     # keeping nouns, adjectives, verbs and cleaning the rest
+#     cleaned = []
+#     for i in range(len(sentenceTk)):
+#         if sentencePOS[i][1] in okPOS:
+#             cleaned.append(sentencePOS[i][0])
+#     return cleaned
 
 
 def lcsChecker(modelans, kidans):
@@ -52,9 +55,9 @@ def keywordsChecker(modelans, kidans):
 def lengthChecker(modelans, kidans):
     return float(min(1, len(kidans)/len(modelans)))
     
-print(lcsChecker("my name is groot", "groot is my name"))
-print(keywordsChecker("my name is groot", "groot is my name"))
-print(lengthChecker("my name is groot", "groot is my name"))
-print(tfLCSChecker("continuing forever", "continuing forever in the same way"))
+# print(lcsChecker("my name is groot", "groot is my name"))
+# print(keywordsChecker("my name is groot", "groot is my name"))
+# print(lengthChecker("my name is groot", "groot is my name"))
+# print(tfLCSChecker("continuing forever", "continuing forever in the same way"))
 
 

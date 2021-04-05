@@ -1,3 +1,4 @@
+from evaluate.models import Result, Test
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm
 from django.contrib.auth import login, authenticate
@@ -29,9 +30,21 @@ def register(request):
 @login_required
 def dashboard(request):
     name = request.user
+    table = []
+    tests = Test.objects.all().filter(user=request.user)
+    print(tests)
+    for test in tests:
+        info = []
+        info.append(test.test_name)
+        info.append(test.uploaded_at)
+        res = Result.objects.get(test=test)
+        info.append(res.mean_percentage)
+        info.append(res.success_rate)
+        table.append(info)
     context = {
         'name' : name.profile.full_name,
-        'title' : 'Dashboard'
+        'title' : 'Dashboard',
+        'table' : table
     }
     return render(request, 'users/dashboard.html', context)
     

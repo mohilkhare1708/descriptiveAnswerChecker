@@ -47,4 +47,4 @@ def testSummary(request, pk):
     data = []
     for i in range(3):
         data.append([res.names[i], res.scores[i], res.emails[i]])
-    return render(request, 'evaluate/testSummary.html', {'result' : data, 'title' : 'Test Summary'})
+    return render(request, 'evaluate/testSummary.html', {'result' : data, 'title' : 'Test Summary', 'name' : res.test.test_name})

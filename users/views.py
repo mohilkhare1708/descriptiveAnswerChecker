@@ -13,7 +13,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
-            user.profile.first_name = form.cleaned_data.get('full_name')
+            user.profile.full_name = form.cleaned_data.get('full_name')
             user.profile.email = form.cleaned_data.get('email')
             user.profile.phone = form.cleaned_data.get('phone')
             user.save()
@@ -30,21 +30,26 @@ def register(request):
 @login_required
 def dashboard(request):
     name = request.user
-    table = []
+    table, dates, means= [], [], []
     tests = Test.objects.all().filter(user=request.user)
-    print(tests)
     for test in tests:
         info = []
+        dates.append(test.uploaded_at.date().strftime('%m/%d/%Y'))
         info.append(test.test_name)
-        info.append(test.uploaded_at)
+        info.append(test.uploaded_at.date())
         res = Result.objects.get(test=test)
+        means.append(res.mean_percentage)
         info.append(res.mean_percentage)
         info.append(res.success_rate)
         table.append(info)
+    print(dates, means)
     context = {
         'name' : name.profile.full_name,
         'title' : 'Dashboard',
-        'table' : table
+        'table' : table,
+        'dates' : dates,
+        'means' : str(means)
     }
+    print(str(dates), str(means))
     return render(request, 'users/dashboard.html', context)
     

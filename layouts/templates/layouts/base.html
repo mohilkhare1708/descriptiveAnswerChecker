@@ -105,6 +105,7 @@
 			</div>
 		</div>
 	</footer>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
 	<script src="{% static 'vendor/aos/aos.js' %}"></script>
 	<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
@@ -112,7 +113,10 @@
 	<script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
 	<script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
 	<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+	<script src="{% static 'js/chart.js/Chart.min.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+	{% comment %} <script src="{% static 'js/charts.js' %}"></script> {% endcomment %}
+	{% block extrascripts %}{% endblock %}
 </body>
 
 </html>

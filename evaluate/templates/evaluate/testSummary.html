@@ -56,11 +56,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								{% for i in result %}
+								{% for res in result %}
 									<tr>
-										<td>{{ i.0 }}</td>
-										<td>{{ i.1 }}</td>
-										<td>{{ i.2 }}</td>
+										<td>{{ res.names }}</td>
+										<td>{{ res.scores }}</td>
+										<td>{{ res.emails }}</td>
 									</tr>
 								{% endfor %}
 							</tbody>

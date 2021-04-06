@@ -38,6 +38,8 @@ def createTest(request):
 @login_required
 def testSummary(request, pk):
     res = Result.objects.get(pk = pk)
+    if res.test.user != request.user:
+        return render(request, 'layouts/accessDenied.html')
     data = []
     for i in range(len(res.names)):
         data.append([res.names[i], res.scores[i], res.emails[i]])

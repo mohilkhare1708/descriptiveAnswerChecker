@@ -36,7 +36,7 @@
 
 			<nav id="navbar" class="navbar" style="right: -10%;">
 				<ul>
-					<li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+					<li><a class="nav-link scrollto active" href="{% url 'home-page' %}">Home</a></li>
 					<li><a class="nav-link scrollto" href="#about">Docs</a></li>
 					{% if user.is_authenticated %}
 						<li><a href="{% url 'dashboard' %}"><button class="btn btn-outline-info">Dashboard</button></a></li>

@@ -4,7 +4,6 @@ from .forms import UserRegisterForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from . import models
 
 
 def register(request):
@@ -30,27 +29,17 @@ def register(request):
 @login_required
 def dashboard(request):
     name = request.user
-    table, dates, means= [], [], []
+    dates, means= [], []
     tests = Test.objects.all().filter(user=request.user)
     for test in tests:
-        info = []
         dates.append(test.uploaded_at.date().strftime('%m/%d/%Y'))
-        info.append(test.test_name)
-        info.append(test.uploaded_at.date())
         res = Result.objects.get(test=test)
         means.append(res.mean_percentage)
-        info.append(res.mean_percentage)
-        info.append(res.success_rate)
-        info.append(res.pk)
-        table.append(info)
-    print(dates, means)
     context = {
         'name' : name.profile.full_name,
         'title' : 'Dashboard',
-        'table' : table,
+        'table' : tests,
         'dates' : dates,
         'means' : str(means)
     }
-    print(str(dates), str(means))
     return render(request, 'users/dashboard.html', context)
-    

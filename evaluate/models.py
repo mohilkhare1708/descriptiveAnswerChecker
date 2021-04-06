@@ -52,7 +52,7 @@ def update_result_signal(sender, instance, created, **kwargs):
         rsheet= pd.DataFrame(data=rsheet)
         names, emails, scores, rollno, answer, passing = [], [], [], [], [], 0
         modelAns = mans['Q1'][0]
-        modelAns = cleanSentence([modelAns])
+        # modelAns = cleanSentence([modelAns])
         for i in range(len(rsheet)):
             names.append(rsheet['Name'][i])
             emails.append(rsheet['Email'][i])
@@ -60,11 +60,11 @@ def update_result_signal(sender, instance, created, **kwargs):
             answer.append(rsheet['Answer'][i])
         # score generation logic here
         for i in range(len(answer)):
-            cleaned = cleanSentence([answer[i]])
-            print(cleaned)
-            lCS_score = lcsChecker(modelAns, cleaned)
-            len_score = lengthChecker(modelAns, cleaned)
-            keyword_score = keywordsChecker(modelAns, cleaned)
+            # cleaned = cleanSentence([answer[i]])
+            # print(cleaned)
+            lCS_score = lcsChecker(modelAns, answer[i])
+            len_score = lengthChecker(modelAns, answer[i])
+            keyword_score = keywordsChecker(modelAns, answer[i])
             print(lCS_score, len_score, keyword_score)
             marks = a * lCS_score + c * len_score + b * keyword_score
             scores.append(marks*100)

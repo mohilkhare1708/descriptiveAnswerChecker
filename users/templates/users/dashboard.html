@@ -24,12 +24,12 @@
               </tr>
               </thead>
               <tbody>
-              {% for i in table %}
+              {% for test in table %}
                 <tr>
-                  <td><a href="{% url 'testSummary' i.4 %}">{{ i.0 }}</a></td>
-                  <td>{{ i.1 }}</td>
-                  <td>{{ i.2 }}%</td>
-                  <td>{{ i.3 }}%</td>
+                  <td><a href="{% url 'testSummary' test.result.pk %}">{{ test.test_name }}</a></td>
+                  <td>{{ test.uploaded_at }}</td>
+                  <td>{{ test.result.mean_percentage }}%</td>
+                  <td>{{ test.result.success_rate }}%</td>
                 </tr>
               {% endfor %}
               </tbody>

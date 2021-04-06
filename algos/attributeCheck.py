@@ -29,8 +29,8 @@ def cleanSentence(lst):
 
 
 def lcsChecker(modelans, kidans):
-    modelAns = cleanSentence(modelans)
-    kidAns = cleanSentence(kidans)
+    modelAns = cleanSentence([modelans])
+    kidAns = cleanSentence([kidans])
     n, m = len(modelAns), len(kidAns)
     dp = [[0 for i in range(m+1)] for j in range(n+1)]
     for i in range(1, n+1):
@@ -40,12 +40,14 @@ def lcsChecker(modelans, kidans):
             else:
                 dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1]
     commonSubsequencesCnt = dp[n][m]
+    print(commonSubsequencesCnt)
     return commonSubsequencesCnt / (2**min(n, m) - 1)
 
 
 def keywordsChecker(modelans, kidans):
-    modelAns = cleanSentence(modelans)
-    kidAns = cleanSentence(kidans)
+    modelAns = cleanSentence([modelans])
+    kidAns = cleanSentence([kidans])
+    print(modelAns, kidAns)
     n, m = len(modelAns), len(kidAns)
     modelAns = set(modelAns)
     intersection = modelAns.intersection(kidAns)
@@ -53,11 +55,14 @@ def keywordsChecker(modelans, kidans):
 
 
 def lengthChecker(modelans, kidans):
+    print(len(kidans), len(modelans), len(kidans)/len(modelans))
     return float(min(1, len(kidans)/len(modelans)))
-    
-# print(lcsChecker("my name is groot", "groot is my name"))
-# print(keywordsChecker("my name is groot", "groot is my name"))
-# print(lengthChecker("my name is groot", "groot is my name"))
-# print(tfLCSChecker("continuing forever", "continuing forever in the same way"))
+
+# modelAns = "The quick brown fox jumped over the lazy dog"
+# kidAns = "The quick brown dragon jumped over the dog"
+# print(lcsChecker(modelAns.lower(), kidAns.lower()))
+# print(keywordsChecker(modelAns.lower(), kidAns.lower()))
+# print(lengthChecker(modelAns.lower(), kidAns.lower()))
+# print(tfLCSChecker(modelAns.lower(), kidAns.lower()))
 
 

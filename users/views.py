@@ -41,6 +41,7 @@ def dashboard(request):
         means.append(res.mean_percentage)
         info.append(res.mean_percentage)
         info.append(res.success_rate)
+        info.append(res.pk)
         table.append(info)
     print(dates, means)
     context = {

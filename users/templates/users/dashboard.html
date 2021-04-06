@@ -26,7 +26,7 @@
               <tbody>
               {% for i in table %}
                 <tr>
-                  <td>{{ i.0 }}</td>
+                  <td><a href="{% url 'testSummary' i.4 %}">{{ i.0 }}</a></td>
                   <td>{{ i.1 }}</td>
                   <td>{{ i.2 }}%</td>
                   <td>{{ i.3 }}%</td>

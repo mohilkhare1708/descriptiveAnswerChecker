@@ -1,17 +1,19 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block content %}
+
 <section id="hero" class="hero d-flex align-items-center">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 d-flex flex-column justify-content-center">
-                <h1 data-aos="fade-up">Answer Checking, Simplified</h1>
-                <h2 data-aos="fade-up" data-aos-delay="400">We provide complete assessment solution, even for descriptive answers!</h2>
+                <h1 data-aos="fade-up">Access Denied!</h1>
+                <h2 data-aos="fade-up" data-aos-delay="400">Kindly login with an admin ID or the account used to create this test.</h2>
             </div>
             <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                <img src="{% static 'img/hero-img.png' %}" class="img-fluid" alt="">
+                <img src="{% static 'img/denied.png' %}" class="img-fluid" alt="">
             </div>
         </div>
     </div>
 </section>
+
 {% endblock content %}

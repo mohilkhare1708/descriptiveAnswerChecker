@@ -12,4 +12,4 @@ Perform the migrations using the following command
 Run the webiste  
 ```python manage.py runserver```
 
-Navigate to ```localhost:8000``` to open the website. Yoo!
+Navigate to ```localhost:8000``` to open the website.

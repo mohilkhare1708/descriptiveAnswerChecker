@@ -29,8 +29,8 @@ def cleanSentence(lst):
 
 
 def lcsChecker(modelans, kidans):
-    modelAns = cleanSentence([modelans])
-    kidAns = cleanSentence([kidans])
+    modelAns = cleanSentence(modelans)
+    kidAns = cleanSentence(kidans)
     n, m = len(modelAns), len(kidAns)
     dp = [[0 for i in range(m+1)] for j in range(n+1)]
     for i in range(1, n+1):
@@ -45,8 +45,8 @@ def lcsChecker(modelans, kidans):
 
 
 def keywordsChecker(modelans, kidans):
-    modelAns = cleanSentence([modelans])
-    kidAns = cleanSentence([kidans])
+    modelAns = cleanSentence(modelans)
+    kidAns = cleanSentence(kidans)
     print(modelAns, kidAns)
     n, m = len(modelAns), len(kidAns)
     modelAns = set(modelAns)

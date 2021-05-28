@@ -11,9 +11,9 @@ import random
 from django.conf import settings
 from algos.attributeCheck import cleanSentence, keywordsChecker, lengthChecker, lcsChecker
 
-a=0.45
+a=0.33
 b = 0.5
-c = 0.05
+c = 0.17
 N = 5
 
 class Test(models.Model):
@@ -68,12 +68,12 @@ def update_result_signal(sender, instance, created, **kwargs):
             print(lCS_score, len_score, keyword_score)
             marks = a * lCS_score + c * len_score + b * keyword_score
             scores.append(min(marks*100, instance.total_marks))
+            print(instance.passing_marks, "hi", marks)
             if marks >= instance.passing_marks:
+                print("hi")
                 passing += 1
-            # df = pd.DataFrame(list(zip(rollno, names, scores, emails)), columns=['Roll Number', 'Name', 'Marks', 'Email'])
-            # token = ''.join(random.choices(string.ascii_uppercase + string.digits, k = N))
-            # df.to_csv(f'{token}.csv')
-        successRate, totalStudents = (float(passing / len(scores)) * 100), len(names)
+        print("broooo", float(passing), len(scores))
+        successRate, totalStudents = (float(float(passing) / float(len(scores))) * 100), len(names)
         meanPercentage = (sum(scores)/(instance.total_marks*totalStudents))*100
         highScore = (max(scores) / instance.total_marks) * 100
         Result.objects.create(test=instance,names=names,emails=emails,scores=scores,total_students=totalStudents,mean_percentage=meanPercentage,success_rate=successRate,high_score=highScore)

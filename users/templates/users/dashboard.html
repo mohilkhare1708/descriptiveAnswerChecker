@@ -20,7 +20,7 @@
                 <th>Test Name</th>
                 <th>Date</th>
                 <th>Mean Score</th>
-                <th>Success Rate</th>
+                <th>Total Students</th>
               </tr>
               </thead>
               <tbody>
@@ -29,7 +29,7 @@
                   <td><a href="{% url 'testSummary' test.result.pk %}">{{ test.test_name }}</a></td>
                   <td>{{ test.uploaded_at }}</td>
                   <td>{{ test.result.mean_percentage }}%</td>
-                  <td>{{ test.result.success_rate }}%</td>
+                  <td>{{ test.result.total_students }}</td>
                 </tr>
               {% endfor %}
               </tbody>
@@ -83,7 +83,7 @@
                 <img src="{% static 'img/features.png' %}" class="img-fluid" alt="" height="75%" width="75%" style="text-align: left !important;">
               </div>
               <div class="col-lg-4 my-auto">
-                <button type="button" class="btn btn-info btn-lg">Train Model</button>
+                <button type="button" class="btn btn-info btn-lg">Train Model (Coming Soon)</button>
               </div>
             </div>
           </div>
